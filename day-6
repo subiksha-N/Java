@@ -1,0 +1,64 @@
+#Write a Java class Vechicle with fields brand and price, and a method display(). Create
+an object and call the method.
+public class demo6 {
+    String brand;
+    double price;
+
+    void display() {
+        System.out.println("Brand: " + brand);
+        System.out.println("Price: ₹" + price);
+    }
+
+    public static void main(String[] args) {
+        demo6 v1 = new demo6();
+        v1.brand = "Honda";
+        v1.price = 1200000;
+        v1.display();
+    }
+}
+#Declare and initialize an object of class Student with fields name and age. Print
+the values.
+public class Student {
+    String name;
+    int age;
+
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        s1.name = "Subiksha";
+        s1.age = 20;
+        System.out.println("Name: " + s1.name);
+        System.out.println("Age: " + s1.age);
+    }
+}
+#Write a method int add(int a, int b) that returns the sum of two numbers. Show method calling.
+public class demo6 {
+    static int add(int a, int b) {
+        return a + b;
+    }
+
+    public static void main(String[] args) {
+        int result = add(5, 7);
+        System.out.println("Sum = " + result);
+    }
+}
+#Write a recursive method to calculate factorial of a number.
+public class Factorial {
+    static int factorial(int n) {
+        if (n == 0 || n == 1)
+            return 1;
+        else
+            return n * factorial(n - 1);
+    }
+
+    public static void main(String[] args) {
+        int num = 5;
+        System.out.println("Factorial of " + num + " = " + factorial(num));
+    }
+}
+#Write a Java program that calls a predefined method (like length() of a string).
+public class demo6 {
+    public static void main(String[] args) {
+        String name = "JavaProgramming";
+        System.out.println("Length of string: " + name.length());
+    }
+}
