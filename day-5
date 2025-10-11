@@ -1,0 +1,77 @@
+#count Words in a Sentence
+import java.util.Scanner;
+public class CountWords {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String str = sc.nextLine();
+        String[] words = str.trim().split("\\s+");
+        System.out.println("Word count: " + words.length);
+        sc.close();
+    }
+}
+#Convert String to Uppercase and Lowercase
+import java.util.Scanner;
+public class CaseConversion {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.nextLine();
+        System.out.println("Uppercase: " + str.toUpperCase());
+        System.out.println("Lowercase: " + str.toLowerCase());
+        sc.close();
+    }
+}
+#Replace All Spaces with Hyphens
+import java.util.Scanner;
+public class ReplaceSpaces {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a sentence: ");
+        String str = sc.nextLine();
+
+        str = str.replace(' ', '-');
+        System.out.println("Modified string: " + str);
+        sc.close();
+    }
+}
+#Count Frequency of Each Character
+import java.util.Scanner;
+public class CharFrequency {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.nextLine();
+        int[] freq = new int[256]; // for all ASCII characters
+        for (char c : str.toCharArray()) {
+            freq[c]++;
+        }
+        System.out.println("Character frequencies:");
+        for (int i = 0; i < 256; i++) {
+            if (freq[i] > 0) {
+                System.out.println((char)i + " → " + freq[i]);
+            }
+        }
+        sc.close();
+    }
+}
+#Remove All Duplicate Characters
+import java.util.Scanner;
+public class RemoveDuplicates {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String str = sc.nextLine();
+        String result = "";
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (result.indexOf(c) == -1) { // if not already added
+                result += c;
+            }
+        }
+        System.out.println("String after removing duplicates: " + result);
+        sc.close();
+    }
+}
+
+
