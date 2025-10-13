@@ -1,0 +1,586 @@
+#Task 1: Student Information System
+Create a simple student information system that allows users to add, delete, and display student information.
+- Create a Student class with properties like this:
+    - studentId: a unique identifier for the student
+    - name: the name of the student
+    - age: the age of the student
+    - grade: the grade of the student
+- Create methods to:
+    - Add a new student
+    - Delete an existing student
+    - Display all students
+- Create a StudentManagementSystem class that manages a list of students.
+- Create a Main class that demonstrates the usage of the student information system.
+import java.util.*;
+class Student {
+    int studentId;
+    String name;
+    int age;
+    String grade;
+    public Student(int studentId, String name, int age, String grade) {
+        this.studentId = studentId;
+        this.name = name;
+        this.age = age;
+        this.grade = grade;
+    }
+
+    // Display one student's info
+    public void displayInfo() {
+        System.out.println("ID: " + studentId + ", Name: " + name + ", Age: " + age + ", Grade: " + grade);
+    }
+}
+class StudentManagementSystem {
+    private ArrayList<Student> students = new ArrayList<>();
+
+    // Add new student
+    public void addStudent(Student s) {
+        students.add(s);
+        System.out.println("Student added successfully!");
+    }
+
+    public void deleteStudent(int id) {
+        boolean found = false;
+        for (Student s : students) {
+            if (s.studentId == id) {
+                students.remove(s);
+                System.out.println("Student with ID " + id + " deleted.");
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("Student ID not found.");
+        }
+    }
+    public void displayAllStudents() {
+        if (students.isEmpty()) {
+            System.out.println("No students to display.");
+        } else {
+            System.out.println("\n Student List:");
+            for (Student s : students) {
+                s.displayInfo();
+            }
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        StudentManagementSystem sms = new StudentManagementSystem();
+
+        while (true) {
+            System.out.println("\n--- Student Information System ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. Delete Student");
+            System.out.println("3. Display All Students");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // consume newline
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Age: ");
+                    int age = sc.nextInt();
+                    sc.nextLine();
+                    System.out.print("Enter Grade: ");
+                    String grade = sc.nextLine();
+                    sms.addStudent(new Student(id, name, age, grade));
+                    break;
+
+                case 2:
+                    System.out.print("Enter Student ID to delete: ");
+                    int deleteId = sc.nextInt();
+                    sms.deleteStudent(deleteId);
+                    break;
+
+                case 3:
+                    sms.displayAllStudents();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting system.");
+                    sc.close();
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println(" Invalid choice. Try again!");
+            }
+        }
+    }
+}
+#Task 2: Library Management System
+Create a simple library management system that allows users to add, delete, and display books.
+- Create a Book class with properties like this:
+    - bookId: a unique identifier for the book
+    - title: the title of the book
+    - author: the author of the book
+    - publisher: the publisher of the book
+- Create methods to:
+    - Add a new book
+    - Delete an existing book
+    - Display all books
+- Create a Library class that manages a list of books.
+- Create a Main class that demonstrates the usage of the library management system.
+import java.util.*;
+public class LibraryManagementSystem {
+    static class Book {
+        int bookId;
+        String title, author, publisher;
+        Book(int bookId, String title, String author, String publisher) {
+            this.bookId = bookId;
+            this.title = title;
+            this.author = author;
+            this.publisher = publisher;
+        }
+        void display() {
+            System.out.println("ID: " + bookId + ", Title: " + title +
+                               ", Author: " + author + ", Publisher: " + publisher);
+        }
+    }
+    static ArrayList<Book> books = new ArrayList<>();
+    static void addBook(Book b) {
+        books.add(b);
+        System.out.println("Book added successfully!");
+    }
+    static void deleteBook(int id) {
+        for (Book b : books) {
+            if (b.bookId == id) {
+                books.remove(b);
+                System.out.println("Book deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Book not found!");
+    }
+    static void displayBooks() {
+        if (books.isEmpty()) {
+            System.out.println("No books in the library.");
+        } else {
+            System.out.println("\n--- Library Books ---");
+            for (Book b : books) {
+                b.display();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\n--- Library Management System ---");
+            System.out.println("1. Add Book");
+            System.out.println("2. Delete Book");
+            System.out.println("3. Display All Books");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Book ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // consume newline
+                    System.out.print("Enter Title: ");
+                    String title = sc.nextLine();
+                    System.out.print("Enter Author: ");
+                    String author = sc.nextLine();
+                    System.out.print("Enter Publisher: ");
+                    String publisher = sc.nextLine();
+                    addBook(new Book(id, title, author, publisher));
+                    break;
+                case 2:
+                    System.out.print("Enter Book ID to delete: ");
+                    int delId = sc.nextInt();
+                    deleteBook(delId);
+                    break;
+                case 3:
+                    displayBooks();
+                    break;
+                case 4:
+                    System.out.println("Exiting... Thank you!");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 4);
+        sc.close();
+    }
+}
+#Task 3: Employee Management System
+Create a simple employee management system that allows users to add, delete, and display employee information.
+- Create an Employee class with properties like this:
+    - employeeId: a unique identifier for the employee
+    - name: the name of the employee
+    - age: the age of the employee
+    - salary: the salary of the employee
+- Create methods to:
+    - Add a new employee
+    - Delete an existing employee
+    - Display all employees
+- Create an EmployeeManagementSystem class that manages a list of employees.
+- Create a Main class that demonstrates the usage of the employee management system.
+import java.util.*;
+public class EmployeeManagementSystem {
+    static class Employee {
+        int employeeId;
+        String name;
+        int age;
+        double salary;
+        Employee(int employeeId, String name, int age, double salary) {
+            this.employeeId = employeeId;
+            this.name = name;
+            this.age = age;
+            this.salary = salary;
+        }
+        void display() {
+            System.out.println("ID: " + employeeId + ", Name: " + name + 
+                               ", Age: " + age + ", Salary: ₹" + salary);
+        }
+    }
+    static ArrayList<Employee> employees = new ArrayList<>();
+    static void addEmployee(Employee e) {
+        employees.add(e);
+        System.out.println("Employee added successfully!");
+    }
+    static void deleteEmployee(int id) {
+        for (Employee e : employees) {
+            if (e.employeeId == id) {
+                employees.remove(e);
+                System.out.println("Employee deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Employee not found!");
+    }
+    static void displayEmployees() {
+        if (employees.isEmpty()) {
+            System.out.println("No employees found.");
+        } else {
+            System.out.println("\n--- Employee List ---");
+            for (Employee e : employees) {
+                e.display();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+        do {
+            System.out.println("\n--- Employee Management System ---");
+            System.out.println("1. Add Employee");
+            System.out.println("2. Delete Employee");
+            System.out.println("3. Display All Employees");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Employee ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // consume newline
+                    System.out.print("Enter Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Age: ");
+                    int age = sc.nextInt();
+                    System.out.print("Enter Salary: ");
+                    double salary = sc.nextDouble();
+                    addEmployee(new Employee(id, name, age, salary));
+                    break;
+
+                case 2:
+                    System.out.print("Enter Employee ID to delete: ");
+                    int delId = sc.nextInt();
+                    deleteEmployee(delId);
+                    break;
+                case 3:
+                    displayEmployees();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting... Thank you!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+#Task 4: Online Shopping System
+Create a simple online shopping system that allows users to add, delete, and display products.
+- Create a Product class with properties like this:
+    - productId: a unique identifier for the product
+    - name: the name of the product
+    - price: the price of the product
+    - quantity: the quantity of the product
+- Create methods to:
+    - Add a new product
+    - Delete an existing product
+    - Display all products
+- Create an OnlineShoppingSystem class that manages a list of products.
+- Create a Main class that demonstrates the usage of the online shopping system.
+import java.util.*;
+
+public class OnlineShoppingSystem {
+    // Product class
+    static class Product {
+        int productId;
+        String name;
+        double price;
+        int quantity;
+
+        Product(int productId, String name, double price, int quantity) {
+            this.productId = productId;
+            this.name = name;
+            this.price = price;
+            this.quantity = quantity;
+        }
+
+        void display() {
+            System.out.println("ID: " + productId + ", Name: " + name + 
+                               ", Price: ₹" + price + ", Quantity: " + quantity);
+        }
+    }
+
+    // List to store products
+    static ArrayList<Product> products = new ArrayList<>();
+
+    // Add product
+    static void addProduct(Product p) {
+        products.add(p);
+        System.out.println("Product added successfully!");
+    }
+
+    // Delete product
+    static void deleteProduct(int id) {
+        for (Product p : products) {
+            if (p.productId == id) {
+                products.remove(p);
+                System.out.println("Product deleted successfully!");
+                return;
+            }
+        }
+        System.out.println("Product not found!");
+    }
+
+    // Display all products
+    static void displayProducts() {
+        if (products.isEmpty()) {
+            System.out.println("No products available.");
+        } else {
+            System.out.println("\n--- Product List ---");
+            for (Product p : products) {
+                p.display();
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Online Shopping System ---");
+            System.out.println("1. Add Product");
+            System.out.println("2. Delete Product");
+            System.out.println("3. Display All Products");
+            System.out.println("4. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Product ID: ");
+                    int id = sc.nextInt();
+                    sc.nextLine(); // consume newline
+                    System.out.print("Enter Product Name: ");
+                    String name = sc.nextLine();
+                    System.out.print("Enter Price: ");
+                    double price = sc.nextDouble();
+                    System.out.print("Enter Quantity: ");
+                    int quantity = sc.nextInt();
+                    addProduct(new Product(id, name, price, quantity));
+                    break;
+
+                case 2:
+                    System.out.print("Enter Product ID to delete: ");
+                    int delId = sc.nextInt();
+                    deleteProduct(delId);
+                    break;
+
+                case 3:
+                    displayProducts();
+                    break;
+
+                case 4:
+                    System.out.println("Exiting... Thank you for shopping with us!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Please try again.");
+            }
+        } while (choice != 4);
+
+        sc.close();
+    }
+}
+#Task 5: Banking System with Multiple Accounts
+Create a simple banking system that allows users to create multiple accounts, deposit and withdraw money, and check their account balance.
+- Create a BankAccount class with properties like this:
+    - accountNumber: a unique identifier for the account
+    - accountHolder: the name of the account holder
+    - balance: the current balance of the account
+- Create methods to:
+    - Deposit money into the account
+    - Withdraw money from the account
+    - Check the account balance
+- Create a Bank class that manages a list of bank accounts.
+- Create a Main class that demonstrates the usage of the banking system.
+import java.util.*;
+public class BankingSystem {
+    static class BankAccount {
+        int accountNumber;
+        String accountHolder;
+        double balance;
+        BankAccount(int accountNumber, String accountHolder, double balance) {
+            this.accountNumber = accountNumber;
+            this.accountHolder = accountHolder;
+            this.balance = balance;
+        }
+
+        void deposit(double amount) {
+            if (amount > 0) {
+                balance += amount;
+                System.out.println("Deposited ₹" + amount + " successfully!");
+            } else {
+                System.out.println("Invalid deposit amount!");
+            }
+        }
+        void withdraw(double amount) {
+            if (amount > 0 && amount <= balance) {
+                balance -= amount;
+                System.out.println("Withdrawn ₹" + amount + " successfully!");
+            } else if (amount > balance) {
+                System.out.println("Insufficient balance!");
+            } else {
+                System.out.println("Invalid withdrawal amount!");
+            }
+        }
+        void checkBalance() {
+            System.out.println("Account Balance for " + accountHolder + ": ₹" + balance);
+        }
+
+        void display() {
+            System.out.println("Account No: " + accountNumber + ", Holder: " + accountHolder + ", Balance: ₹" + balance);
+        }
+    }
+    static ArrayList<BankAccount> accounts = new ArrayList<>();
+    static void createAccount(BankAccount acc) {
+        accounts.add(acc);
+        System.out.println("Account created successfully!");
+    }
+    static BankAccount findAccount(int accNo) {
+        for (BankAccount acc : accounts) {
+            if (acc.accountNumber == accNo)
+                return acc;
+        }
+        return null;
+    }
+    static void displayAllAccounts() {
+        if (accounts.isEmpty()) {
+            System.out.println("No accounts found.");
+        } else {
+            System.out.println("\n--- All Bank Accounts ---");
+            for (BankAccount acc : accounts) {
+                acc.display();
+            }
+        }
+    }
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Banking System ---");
+            System.out.println("1. Create Account");
+            System.out.println("2. Deposit Money");
+            System.out.println("3. Withdraw Money");
+            System.out.println("4. Check Balance");
+            System.out.println("5. Display All Accounts");
+            System.out.println("6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter Account Number: ");
+                    int accNo = sc.nextInt();
+                    sc.nextLine(); // consume newline
+                    System.out.print("Enter Account Holder Name: ");
+                    String holder = sc.nextLine();
+                    System.out.print("Enter Initial Balance: ");
+                    double balance = sc.nextDouble();
+                    createAccount(new BankAccount(accNo, holder, balance));
+                    break;
+
+                case 2:
+                    System.out.print("Enter Account Number: ");
+                    accNo = sc.nextInt();
+                    BankAccount depositAcc = findAccount(accNo);
+                    if (depositAcc != null) {
+                        System.out.print("Enter Deposit Amount: ");
+                        double amt = sc.nextDouble();
+                        depositAcc.deposit(amt);
+                    } else {
+                        System.out.println("Account not found!");
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Enter Account Number: ");
+                    accNo = sc.nextInt();
+                    BankAccount withdrawAcc = findAccount(accNo);
+                    if (withdrawAcc != null) {
+                        System.out.print("Enter Withdrawal Amount: ");
+                        double amt = sc.nextDouble();
+                        withdrawAcc.withdraw(amt);
+                    } else {
+                        System.out.println("Account not found!");
+                    }
+                    break;
+
+                case 4:
+                    System.out.print("Enter Account Number: ");
+                    accNo = sc.nextInt();
+                    BankAccount checkAcc = findAccount(accNo);
+                    if (checkAcc != null) {
+                        checkAcc.checkBalance();
+                    } else {
+                        System.out.println("Account not found!");
+                    }
+                    break;
+
+                case 5:
+                    displayAllAccounts();
+                    break;
+
+                case 6:
+                    System.out.println("Exiting... Thank you for banking with us!");
+                    break;
+
+                default:
+                    System.out.println("Invalid choice! Try again.");
+            }
+        } while (choice != 6);
+
+        sc.close();
+    }
+}
